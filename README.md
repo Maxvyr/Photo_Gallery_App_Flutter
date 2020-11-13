@@ -30,9 +30,9 @@
      
 ## Wiki
 * lib find on [pub.dev](https://pub.dev/)
-    * camera [camera](https://pub.dev/packages/camera)
-    * path [path](https://pub.dev/packages/path)
-    * path_provider [path_provider](https://pub.dev/packages/path_provider)   
+    * [camera](https://pub.dev/packages/camera)
+    * [path](https://pub.dev/packages/path)
+    * [path_provider](https://pub.dev/packages/path_provider)   
 
 ## API
 * 
