@@ -49,3 +49,13 @@
 * [Download Android Studio](https://developer.android.com/studio)
 * [Create a new virtual device](https://developer.android.com/studio/run/managing-avds.html)
 * [Enable developer options and debugging](https://developer.android.com/studio/debug/dev-options.html#enable)
+
+
+# Tips
+
+<a href="https://www.buymeacoffee.com/Maxvy" target="_blank"><img src="https://i.imgur.com/CNigpZm.png" alt="A Little Coffee Please" style="height: 25px;width: 50px;" ></a>
+
+# Crypto Tips 
+
+![ETH_QR_Code](https://i.imgur.com/XpF2vgw.png)
+
