@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../controller/color.dart';
@@ -9,16 +11,19 @@ class MyCupertinoAlertDialog extends CupertinoAlertDialog {
   MyCupertinoAlertDialog({
     @required BuildContext context,
     @required int index,
+    @required List<File> images,
   }) : super(
           content: Column(
             children: <Widget>[
-              MyText(
-                data: "Selected Item $index",
-                colorShadow: transparent,
-              ),
-              Icon(
-                Icons.favorite,
-                color: greenLight,
+              // MyText(
+              //   data: "Position Picture $index",
+              //   colorShadow: transparent,
+              // ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(borderRadiusDefault),
+                child: Image.file(
+                  images[index],
+                ),
               ),
             ],
           ),

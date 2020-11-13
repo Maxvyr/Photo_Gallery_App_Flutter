@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gallery_photo_flutter/controller/routes.dart';
 import 'controller/color.dart';
 import 'controller/constants.dart';
 import 'view/home_page.dart';
@@ -20,7 +21,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: titleApp),
+      // home: MyHomePage(title: titleApp),
+      initialRoute: homeRoute,
+      routes: {
+        homeRoute: (context) => MyHomePage(
+              title: titleApp,
+            ),
+      },
     );
   }
 }
