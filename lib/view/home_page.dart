@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_photo_flutter/controller/utils/stockRecover.dart';
+import 'package:gallery_photo_flutter/models/database_client.dart';
+import 'package:gallery_photo_flutter/models/itemPhoto.dart';
 import 'package:image_picker/image_picker.dart';
 import '../controller/color.dart';
 import '../controller/constants.dart';
@@ -34,11 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
         print("list length before => ${imagesFromCamera.length}");
         print(" path pictures => $photoTaking");
         imagesFromCamera.add(photoTaking);
+        stockValuedb(imagesFromCamera);
         print("list length after => ${imagesFromCamera.length}");
       } else {
         print("No image to add");
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
