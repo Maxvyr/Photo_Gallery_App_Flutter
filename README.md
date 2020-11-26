@@ -1,14 +1,21 @@
 # gallery_photo_flutter
-
-
 **Goal**: Project with flutter a Gallery app with usinf camera
 
 ## Features to develop
 * Add camera 
 * Take pictures and save them in the GridView
-* Save Pictures in file
+* Save Pictures in db with sqflite
+* Share pictures
 
-## Screenshot (coming soon)
+
+
+# Tips
+
+<a href="https://www.buymeacoffee.com/Maxvy" target="_blank"><img src="https://i.imgur.com/CNigpZm.png" alt="A Little Coffee Please" style="height: 25px;width: 50px;" ></a>
+
+# Crypto Tips 
+
+![ETH_QR_Code](https://i.imgur.com/XpF2vgw.png)
 
 ## Requirements
 * Computer (Windows, Mac or Linux)
@@ -30,12 +37,14 @@
      
 ## Wiki
 * lib find on [pub.dev](https://pub.dev/)
-    * [camera](https://pub.dev/packages/camera)
-    * [path](https://pub.dev/packages/path)
+    * [image_picker](https://pub.dev/packages/image_picker)   
+    * [intl](https://pub.dev/packages/intl)   
+    * [sqflite](https://pub.dev/packages/sqflite)   
     * [path_provider](https://pub.dev/packages/path_provider)   
+    * [share](https://pub.dev/packages/share)   
 
 ## API
-* 
+* Nothing
 
 ## Troubleshooting
 
@@ -50,12 +59,4 @@
 * [Create a new virtual device](https://developer.android.com/studio/run/managing-avds.html)
 * [Enable developer options and debugging](https://developer.android.com/studio/debug/dev-options.html#enable)
 
-
-# Tips
-
-<a href="https://www.buymeacoffee.com/Maxvy" target="_blank"><img src="https://i.imgur.com/CNigpZm.png" alt="A Little Coffee Please" style="height: 25px;width: 50px;" ></a>
-
-# Crypto Tips 
-
-![ETH_QR_Code](https://i.imgur.com/XpF2vgw.png)
 
