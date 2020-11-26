@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_photo_flutter/controller/utils/stockRecover.dart';
+import 'package:gallery_photo_flutter/models/database_client.dart';
+import 'package:gallery_photo_flutter/models/itemPhoto.dart';
 import 'package:image_picker/image_picker.dart';
 import '../controller/color.dart';
 import '../controller/constants.dart';
@@ -22,12 +23,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   //var
-  bool listIsEmpty;
-  List<File> imagesFromCamera = [];
+  List<ItemPhoto> images = [];
 
   @override
   void initState() {
     super.initState();
+    //recover data
+    _recoverData();
   }
 
   @override
@@ -37,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     //show dialog
     Future showDialogOnClick({
-      @required File image,
+      @required String imagePath,
       @required int index,
     }) {
       return showDialog(
@@ -45,8 +47,8 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         child: MyCupertinoAlertDialog(
           context: context,
-          image: image,
-          onPressDelete: () => deleteImage(image),
+          imagePath: imagePath,
+          onPressDelete: () => deleteImage(imagePath),
         ),
       );
     }
@@ -59,18 +61,18 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           width: totalWidth * 0.92,
           child: GridView.builder(
-            itemCount: imagesFromCamera.length,
+            itemCount: images.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: gridCount,
               crossAxisSpacing: axisSpacing,
               mainAxisSpacing: axisSpacing,
             ),
             itemBuilder: (BuildContext context, int position) {
-              File image = imagesFromCamera[position];
+              ItemPhoto photo = images[position];
               //if list vide return Nothing
               //else return list
-              if (imagesFromCamera.isEmpty) {
-                print(imagesFromCamera.length);
+              if (images.isEmpty) {
+                print(images.length);
                 return Center(
                   child: MyText(
                     data: "No Images",
@@ -89,14 +91,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(borderRadiusDefault),
                       child: Image.file(
-                        image,
+                        File(photo.image),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   onTap: () {
                     showDialogOnClick(
-                      image: image,
+                      imagePath: photo.image,
                       index: position,
                     );
                   },
@@ -108,32 +110,47 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: MyFloatingActionButton(
         icon: Icons.add,
-        onPressed: () => openCamera(imagesFromCamera, ImageSource.camera),
+        onPressed: () => openCamera(images, ImageSource.camera),
       ),
     );
   }
 
   //delete picture from the list
-  void deleteImage(File image) {
-    imagesFromCamera.remove(image);
+  void deleteImage(String image) {
+    images.remove(image);
     setState(() {});
   }
 
   //add picture takes to the list
-  Future openCamera(List<File> imagesFromCamera, ImageSource source) async {
+  Future openCamera(List<ItemPhoto> images, ImageSource source) async {
     ImagePicker picker = ImagePicker();
     final image = await picker.getImage(source: source);
     setState(() {
       if (image != null) {
-        var photoTaking = File(image.path);
-        print("list length before => ${imagesFromCamera.length}");
-        print(" path pictures => $photoTaking");
-        imagesFromCamera.add(photoTaking);
-        stockValuedb(imagesFromCamera);
-        print("list length after => ${imagesFromCamera.length}");
+        var photoTakes = File(image.path);
+        print("list length before => ${images.length}");
+        print("path pictures => $photoTakes");
+        // imagesFromCamera.add(photoTakes);
+        stockValue(image.path);
       } else {
         print("No image to add");
       }
+    });
+  }
+
+  void stockValue(String image) {
+    ItemPhoto item = ItemPhoto();
+    Map<String, dynamic> map = {"image": image};
+    item.fromMap(map);
+    DataBaseClient().upsertItem(item).then((value) => _recoverData());
+  }
+
+  void _recoverData() {
+    DataBaseClient().readAllItem().then((itemListRecover) {
+      setState(() {
+        this.images = itemListRecover;
+        print("list length after => ${images.length}");
+      });
     });
   }
 }

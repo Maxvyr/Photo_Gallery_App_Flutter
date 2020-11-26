@@ -10,7 +10,7 @@ import 'my_text.dart';
 class MyCupertinoAlertDialog extends CupertinoAlertDialog {
   MyCupertinoAlertDialog({
     @required BuildContext context,
-    @required File image,
+    @required String imagePath,
     VoidCallback onPressDelete,
   }) : super(
           content: Column(
@@ -19,7 +19,7 @@ class MyCupertinoAlertDialog extends CupertinoAlertDialog {
                 borderRadius:
                     BorderRadius.circular(constant.borderRadiusDefault),
                 child: Image.file(
-                  image,
+                  File(imagePath),
                 ),
               ),
             ],

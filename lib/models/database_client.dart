@@ -36,12 +36,12 @@ class DataBaseClient {
     await db.execute('''
       CREATE TABLE item(
         id INTEGER PRIMARY KEY,
-        file TEXT NOT NULL
+        image TEXT NOT NULL
       )
       ''');
   }
 
-  //Ecritue des données
+  //Ecritue des data
 
   Future<ItemPhoto> insertItem(ItemPhoto item) async {
     Database myDatabase = await database;
@@ -62,7 +62,7 @@ class DataBaseClient {
         .update("item", item.toMap(), where: "id = ?", whereArgs: [item.id]);
   }
 
-  //Update or Insert alseo call upsert
+  //Update or Insert also call upsert
   Future<ItemPhoto> upsertItem(ItemPhoto item) async {
     Database myDatabase = await database;
     // if item == null insert new line in database
@@ -92,7 +92,7 @@ class DataBaseClient {
     );
   }
 
-  //Lecture dse données
+  //Lecture des data
 
   Future<List<ItemPhoto>> readAllItem() async {
     Database myDatabase = await database;
