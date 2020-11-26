@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_photo_flutter/models/itemPhoto.dart';
 import '../../controller/color.dart';
 import '../../controller/constants.dart' as constant;
 
@@ -10,7 +11,7 @@ import 'my_text.dart';
 class MyCupertinoAlertDialog extends CupertinoAlertDialog {
   MyCupertinoAlertDialog({
     @required BuildContext context,
-    @required String imagePath,
+    @required ItemPhoto photo,
     VoidCallback onPressDelete,
   }) : super(
           content: Column(
@@ -19,7 +20,7 @@ class MyCupertinoAlertDialog extends CupertinoAlertDialog {
                 borderRadius:
                     BorderRadius.circular(constant.borderRadiusDefault),
                 child: Image.file(
-                  File(imagePath),
+                  File(photo.imagePath),
                 ),
               ),
             ],

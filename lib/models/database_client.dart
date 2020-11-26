@@ -34,7 +34,7 @@ class DataBaseClient {
   //command en sql pour créer ma base de données
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE item(
+      CREATE TABLE photoList(
         id INTEGER PRIMARY KEY,
         image TEXT NOT NULL
       )
@@ -47,7 +47,7 @@ class DataBaseClient {
     Database myDatabase = await database;
     // on ajoute a la table a appler item un valeur a l'id déja existant
     // que l'on récup avec la méthode toMap de item
-    item.id = await myDatabase.insert("item", item.toMap());
+    item.id = await myDatabase.insert("photoList", item.toMap());
     return item;
   }
 
@@ -58,8 +58,8 @@ class DataBaseClient {
     // le where c'est on cherche la colonne id de cette table
     // whereargs dans cette colonne on trouve l'arg id de param
     // et donc on update la ligne avec ce id de la table
-    return myDatabase
-        .update("item", item.toMap(), where: "id = ?", whereArgs: [item.id]);
+    return myDatabase.update("photoList", item.toMap(),
+        where: "id = ?", whereArgs: [item.id]);
   }
 
   //Update or Insert also call upsert
@@ -68,12 +68,12 @@ class DataBaseClient {
     // if item == null insert new line in database
     // else update value at the good position
     if (item.id == null) {
-      print("add new item");
-      item.id = await myDatabase.insert("item", item.toMap());
+      print("add new item to the db");
+      item.id = await myDatabase.insert("photoList", item.toMap());
     } else {
-      print("update item");
-      myDatabase
-          .update("item", item.toMap(), where: "id = ?", whereArgs: [item.id]);
+      print("update item in the db");
+      myDatabase.update("photoList", item.toMap(),
+          where: "id = ?", whereArgs: [item.id]);
     }
     return item;
   }
@@ -84,7 +84,7 @@ class DataBaseClient {
     // le where c'est on cherche la colonne id de cette table
     // whereargs dans cette colonne on trouve l'arg id de param
     // et donc on suppr la ligne avec ce id de la table
-    print("delete item");
+    print("delete item in th db");
     return await myDatabase.delete(
       table,
       where: "id = ?",
@@ -98,7 +98,7 @@ class DataBaseClient {
     Database myDatabase = await database;
     // on récupère tout les composant de la list item (SELECT *)
     List<Map<String, dynamic>> resultat =
-        await myDatabase.rawQuery("SELECT * from item");
+        await myDatabase.rawQuery("SELECT * from photoList");
     // créer list d'item vide
     // boucle sur toute la liste de map qui a recup ma database
     // dans la boucle a chaque ligne

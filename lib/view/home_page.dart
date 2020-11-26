@@ -39,17 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
     //show dialog
     Future showDialogOnClick({
-      @required String imagePath,
+      @required ItemPhoto image,
       @required int index,
     }) {
       return showDialog(
         barrierDismissible: true,
         context: context,
         child: MyCupertinoAlertDialog(
-          context: context,
-          imagePath: imagePath,
-          onPressDelete: () => deleteImage(imagePath),
-        ),
+            context: context,
+            photo: image,
+            onPressDelete: () => deleteImage(image)),
       );
     }
 
@@ -68,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSpacing: axisSpacing,
             ),
             itemBuilder: (BuildContext context, int position) {
-              ItemPhoto photo = images[position];
+              ItemPhoto image = images[position];
               //if list vide return Nothing
               //else return list
               if (images.isEmpty) {
@@ -91,14 +90,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(borderRadiusDefault),
                       child: Image.file(
-                        File(photo.image),
+                        File(image.imagePath),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   onTap: () {
                     showDialogOnClick(
-                      imagePath: photo.image,
+                      image: image,
                       index: position,
                     );
                   },
@@ -115,10 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  //delete picture from the list
-  void deleteImage(String image) {
-    images.remove(image);
-    setState(() {});
+  //delete picture from the db and update the list show
+  void deleteImage(ItemPhoto image) {
+    DataBaseClient()
+        .deleteItem(image.id, "photoList")
+        .then((value) => _recoverData());
   }
 
   //add picture takes to the list
@@ -138,9 +138,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void stockValue(String image) {
+  void stockValue(String imagePath) {
     ItemPhoto item = ItemPhoto();
-    Map<String, dynamic> map = {"image": image};
+    Map<String, dynamic> map = {"image": imagePath};
     item.fromMap(map);
     DataBaseClient().upsertItem(item).then((value) => _recoverData());
   }
