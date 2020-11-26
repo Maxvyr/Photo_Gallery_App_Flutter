@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_photo_flutter/models/database_client.dart';
-import 'package:gallery_photo_flutter/models/itemPhoto.dart';
 import 'package:image_picker/image_picker.dart';
+import '../models/database_client.dart';
+import '../models/itemPhoto.dart';
 import '../controller/color.dart';
 import '../controller/constants.dart';
 import 'widget/my_floating_action_button.dart';

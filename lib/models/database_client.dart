@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'dart:core';
 
-import 'package:gallery_photo_flutter/models/itemPhoto.dart';
+import 'itemPhoto.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-
-import 'itemPhoto.dart';
 
 class DataBaseClient {
   Database _database;

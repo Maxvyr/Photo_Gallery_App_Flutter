@@ -1,6 +1,6 @@
 //String
 final String titleApp = "Gallery Flutter";
-final String validate = "Retour";
+final String share = "Partager";
 final String delete = "Supprimer";
 
 //Double

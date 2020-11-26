@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gallery_photo_flutter/controller/routes.dart';
+import 'controller/routes.dart';
 import 'controller/color.dart';
 import 'controller/constants.dart';
 import 'view/home_page.dart';

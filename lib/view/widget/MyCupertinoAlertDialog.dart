@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_photo_flutter/models/itemPhoto.dart';
-import '../../controller/color.dart';
+import 'package:share/share.dart';
 import '../../controller/constants.dart' as constant;
-
-import 'my_text.dart';
 
 class MyCupertinoAlertDialog extends CupertinoAlertDialog {
   MyCupertinoAlertDialog({
@@ -28,23 +26,19 @@ class MyCupertinoAlertDialog extends CupertinoAlertDialog {
           actions: <Widget>[
             FlatButton(
               onPressed: () {
+                Share.shareFiles([photo.imagePath],
+                    text: "Great Picture, "
+                        "share them for your pleasure");
                 Navigator.of(context).pop();
               },
-              child: MyText(
-                //TODO implement share
-                data: constant.validate,
-                colorShadow: transparent,
-              ),
+              child: Icon(Icons.share),
             ),
             FlatButton(
               onPressed: () {
                 onPressDelete();
                 Navigator.of(context).pop();
               },
-              child: MyText(
-                data: constant.delete,
-                colorShadow: transparent,
-              ),
+              child: Icon(Icons.delete_forever),
             ),
           ],
         );
