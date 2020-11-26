@@ -1,6 +1,7 @@
 //String
 final String titleApp = "Gallery Flutter";
 final String validate = "Retour";
+final String delete = "Supprimer";
 
 //Double
 final double elevationFAB = 10.0;

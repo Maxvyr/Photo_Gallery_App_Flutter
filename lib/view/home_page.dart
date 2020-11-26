@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     //show dialog
     Future showDialogOnClick({
-      @required List<File> images,
+      @required File image,
       @required int index,
     }) {
       return showDialog(
@@ -45,8 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         child: MyCupertinoAlertDialog(
           context: context,
-          index: index,
-          images: images,
+          image: image,
+          onPressDelete: () => deleteImage(image),
         ),
       );
     }
@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisSpacing: axisSpacing,
             ),
             itemBuilder: (BuildContext context, int position) {
+              File image = imagesFromCamera[position];
               //if list vide return Nothing
               //else return list
               if (imagesFromCamera.isEmpty) {
@@ -88,14 +89,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(borderRadiusDefault),
                       child: Image.file(
-                        imagesFromCamera[position],
+                        image,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   onTap: () {
                     showDialogOnClick(
-                      images: imagesFromCamera,
+                      image: image,
                       index: position,
                     );
                   },
@@ -110,6 +111,12 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () => openCamera(imagesFromCamera, ImageSource.camera),
       ),
     );
+  }
+
+  //delete picture from the list
+  void deleteImage(File image) {
+    imagesFromCamera.remove(image);
+    setState(() {});
   }
 
   //add picture takes to the list
