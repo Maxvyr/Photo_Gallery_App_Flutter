@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_photo_flutter/controller/utils/stockRecover.dart';
-import 'package:gallery_photo_flutter/models/database_client.dart';
-import 'package:gallery_photo_flutter/models/itemPhoto.dart';
 import 'package:image_picker/image_picker.dart';
 import '../controller/color.dart';
 import '../controller/constants.dart';
@@ -25,25 +23,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //var
   bool listIsEmpty;
-  ImagePicker picker = ImagePicker();
   List<File> imagesFromCamera = [];
-
-  //add picture takes to the list
-  Future startCameraPage() async {
-    var cameraPhoto = await picker.getImage(source: ImageSource.camera);
-    this.setState(() {
-      if (cameraPhoto != null) {
-        var photoTaking = File(cameraPhoto.path);
-        print("list length before => ${imagesFromCamera.length}");
-        print(" path pictures => $photoTaking");
-        imagesFromCamera.add(photoTaking);
-        stockValuedb(imagesFromCamera);
-        print("list length after => ${imagesFromCamera.length}");
-      } else {
-        print("No image to add");
-      }
-    });
-  }
 
   @override
   void initState() {
@@ -127,8 +107,26 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: MyFloatingActionButton(
         icon: Icons.add,
-        onPressed: startCameraPage,
+        onPressed: () => openCamera(imagesFromCamera, ImageSource.camera),
       ),
     );
+  }
+
+  //add picture takes to the list
+  Future openCamera(List<File> imagesFromCamera, ImageSource source) async {
+    ImagePicker picker = ImagePicker();
+    final image = await picker.getImage(source: source);
+    setState(() {
+      if (image != null) {
+        var photoTaking = File(image.path);
+        print("list length before => ${imagesFromCamera.length}");
+        print(" path pictures => $photoTaking");
+        imagesFromCamera.add(photoTaking);
+        stockValuedb(imagesFromCamera);
+        print("list length after => ${imagesFromCamera.length}");
+      } else {
+        print("No image to add");
+      }
+    });
   }
 }
