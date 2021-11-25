@@ -16,12 +16,12 @@ contact : pandamydev@gmail.com
 
 # Tips
 
-* [Donation](https://ko-fi.com/maxvyr)
-
-# Crypto Tips 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A72UVP8)
 
 
-![ETH_QR_Code](https://i.imgur.com/XpF2vgw.png)
+## Crypto Tips
+
+![https://i.imgur.com/4bS8l7R.png](https://i.imgur.com/4bS8l7R.png)
 
 ## Requirements
 * Computer (Windows, Mac or Linux)
