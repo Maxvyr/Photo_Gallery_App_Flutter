@@ -21,7 +21,7 @@ contact : pandamydev@gmail.com
 
 ## Crypto Tips
 
-![https://i.imgur.com/4bS8l7R.png](https://i.imgur.com/4bS8l7R.png)
+![https://i.imgur.com/4bS8l7R.png](https://i.imgur.com/o7CLDbW.png)
 
 ## Requirements
 * Computer (Windows, Mac or Linux)
